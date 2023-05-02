@@ -4,6 +4,8 @@ using ETicaretAPI.Application.RequestParameters;
 using ETicaretAPI.Application.ViewModels.Products;
 using ETicaretAPI.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Specialized;
 using System.Net;
 
 namespace ETicaretAPI.API.Controllers
@@ -22,6 +24,7 @@ namespace ETicaretAPI.API.Controllers
         readonly IInvoiceFileReadRepository _invoiceFileReadRepository;
         readonly IInvoiceFileWriteRepository _invoiceFileWriteRepository;
         readonly IStorageService _storageService;
+        readonly IConfiguration configuration;
 
         /* -1.0
         readonly private IOrderWriteRepository _orderWriteRepository;
@@ -39,7 +42,8 @@ namespace ETicaretAPI.API.Controllers
             IProductImageFileWriteRepository productImageFileWriteRepository,
             IInvoiceFileReadRepository invoiceFileReadRepository,
             IInvoiceFileWriteRepository invoiceFileWriteRepository,
-            IStorageService storageService
+            IStorageService storageService,
+            IConfiguration configuration
             /* -1.0
 IOrderWriteRepository orderWriteRepository,
 ICustomerWriteRepository customerWriteRepository,
@@ -56,6 +60,7 @@ IOrderReadRepository orderReadRepository */
             _invoiceFileReadRepository = invoiceFileReadRepository;
             _invoiceFileWriteRepository = invoiceFileWriteRepository;
             _storageService = storageService;
+            this.configuration = configuration;
 
             /* -1.0
 _orderWriteRepository = orderWriteRepository;
@@ -128,18 +133,46 @@ _customerWriteRepository = customerWriteRepository; */
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Upload()
+        public async Task<IActionResult> Upload(string id)
         {
-            var datas = await _storageService.UploadAsync("files", Request.Form.Files); // Azure Blob Storage
+            List<(string fileName, string pathOrContainerName)> result = await _storageService.UploadAsync("photo-images", Request.Form.Files);
+
+            Product product = await _productReadRepository.GetbyIdAsync(id);
+
+            //foreach (var r in result)
+            //{
+            //    product.ProductImageFiles.Add(new ProductImageFile
+            //    {
+            //        FileName = r.fileName,
+            //        Path = r.pathOrContainerName,
+            //        Storage = _storageService.StorageName,
+            //        Products = new List<Product>() { product }
+            //    });
+            //}
+
+            await _productImageFileWriteRepository.AddRangeAsync(result.Select(r => new ProductImageFile
+            {
+                FileName = r.fileName,
+                Path = r.pathOrContainerName,
+                Storage = _storageService.StorageName,
+                Products = new List<Product>() { product }
+            }).ToList());
+
+            await _productImageFileWriteRepository.SaveAsync();//api kısmında gönderilen dosyaları burada işlemiş oluyoruz.
+
+            return Ok();
+
+            /*
+            ////var datas = await _storageService.UploadAsync("files", Request.Form.Files); // Azure Blob Storage
             //var datas = await _storageService.UploadAsync("resource/files", Request.Form.Files);
             //var datas = await _fileService.UploadAsync("resource/product-images", Request.Form.Files);
-            await _productImageFileWriteRepository.AddRangeAsync(datas.Select(d => new ProductImageFile()
-            {
-                FileName = d.fileName,
-                Path = d.pathOrContainerName,
-                Storage = _storageService.StorageName
-            }).ToList());
-            await _productImageFileWriteRepository.SaveAsync();
+            ////await _productImageFileWriteRepository.AddRangeAsync(datas.Select(d => new ProductImageFile()
+            ////{
+            ////    FileName = d.fileName,
+            ////    Path = d.pathOrContainerName,
+            ////    Storage = _storageService.StorageName
+            ////}).ToList());
+            ////await _productImageFileWriteRepository.SaveAsync();
 
             //var datas = await _fileService.UploadAsync("resource/invoices", Request.Form.Files);
             //await _invoiceFileWriteRepository.AddRangeAsync(datas.Select(d => new InvoiceFile()
@@ -162,8 +195,35 @@ _customerWriteRepository = customerWriteRepository; */
             //var d2 = _productImageFileReadRepository.GetAll(false);
             //var d3 = _invoiceFileReadRepository.GetAll(false);
 
+            ////return Ok();
+            ///*/
+        }
+
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetProductImages(string id)
+        {
+            Product? product = await _productReadRepository.Table.Include(p => p.ProductImageFiles).FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+
+            return Ok(product.ProductImageFiles.Select(p => new 
+            {
+                Path = $"{configuration["BaseStorageUrl"]}/{p.Path}",
+                p.FileName,
+                p.Id
+
+            }));
+            }
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> DeleteProductImage(string id, string imageId)
+        {
+            Product? product = await _productReadRepository.Table.Include(p => p.ProductImageFiles).FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+
+            ProductImageFile productImageFile = product.ProductImageFiles.FirstOrDefault(p => p.Id == Guid.Parse(imageId));
+            product.ProductImageFiles.Remove(productImageFile);
+            await _productImageFileWriteRepository.SaveAsync();
+
             return Ok();
         }
+
 
         /* -1.0
         //public async Task Get()
