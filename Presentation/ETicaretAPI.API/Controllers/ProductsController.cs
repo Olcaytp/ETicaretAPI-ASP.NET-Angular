@@ -1,8 +1,11 @@
 ﻿using ETicaretAPI.Application.Abstractions.Storage;
+using ETicaretAPI.Application.Features.Commands.CreateProduct;
+using ETicaretAPI.Application.Features.Queries.GetAllProduct;
 using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Application.RequestParameters;
 using ETicaretAPI.Application.ViewModels.Products;
 using ETicaretAPI.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Specialized;
@@ -26,6 +29,8 @@ namespace ETicaretAPI.API.Controllers
         readonly IStorageService _storageService;
         readonly IConfiguration configuration;
 
+        readonly IMediator _mediator;
+
         /* -1.0
         readonly private IOrderWriteRepository _orderWriteRepository;
         readonly private IOrderReadRepository _orderReadRepository;
@@ -44,6 +49,8 @@ namespace ETicaretAPI.API.Controllers
             IInvoiceFileWriteRepository invoiceFileWriteRepository,
             IStorageService storageService,
             IConfiguration configuration
+,
+            IMediator mediator
             /* -1.0
 IOrderWriteRepository orderWriteRepository,
 ICustomerWriteRepository customerWriteRepository,
@@ -61,6 +68,7 @@ IOrderReadRepository orderReadRepository */
             _invoiceFileWriteRepository = invoiceFileWriteRepository;
             _storageService = storageService;
             this.configuration = configuration;
+            _mediator = mediator;
 
             /* -1.0
 _orderWriteRepository = orderWriteRepository;
@@ -69,25 +77,10 @@ _customerWriteRepository = customerWriteRepository; */
 
         }
         [HttpGet]
-
-        public async Task<IActionResult> Get([FromQuery]Pagination pagination)
+        public async Task<IActionResult> Get([FromQuery] GetAllProductQueryRequest getAllProductQueryRequest )
         {
-           var totalCount = _productReadRepository.GetAll(false).Count();
-           var products = _productReadRepository.GetAll(false).Skip(pagination.Page * pagination.Size).Take(pagination.Size).Select(p => new
-            {
-                p.Id,
-                p.Name,
-                p.Price,
-                p.Stock,
-                p.CreatedDate,
-                p.UpdatedDate
-            }).ToList();
-            //take-skip yapısı ile sayfalama yapılabilir. 3.sayfada 5 eleman varsa 15. elemandan başlayıp 5 eleman getirir.
-            return Ok(new
-            {
-                totalCount,
-                products
-            });
+           GetAllProductQueryReponse response = await _mediator.Send(getAllProductQueryRequest);
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
@@ -99,15 +92,9 @@ _customerWriteRepository = customerWriteRepository; */
 
         [HttpPost]
 
-        public async Task<IActionResult> Post(VM_Create_Product model)
+        public async Task<IActionResult> Post(CreateProductCommandRequest createProductCommandRequest)
         {
-            await _productWriteRepository.AddAsync(new()
-            {
-                Name = model.Name,
-                Price= model.Price,
-                Stock = model.Stock,
-            });
-            await _productWriteRepository.SaveAsync();
+            CreateProductCommandResponse response = await _mediator.Send(createProductCommandRequest);
             return StatusCode((int)HttpStatusCode.Created);
         }
 
@@ -202,7 +189,8 @@ _customerWriteRepository = customerWriteRepository; */
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetProductImages(string id)
         {
-            Product? product = await _productReadRepository.Table.Include(p => p.ProductImageFiles).FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+            Product? product = await _productReadRepository.Table.Include(p => p.ProductImageFiles)
+                    .FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
 
             return Ok(product.ProductImageFiles.Select(p => new 
             {
