@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace ETicaretAPI.Application.Features.Commands.AppUser
+namespace ETicaretAPI.Application.Features.Commands.AppUser.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
     {
@@ -23,7 +23,7 @@ namespace ETicaretAPI.Application.Features.Commands.AppUser
                 NamSurname = request.NameSurname
             }, request.Password);
 
-            CreateUserCommandResponse response = new () { Succeeded = result.Succeeded };
+            CreateUserCommandResponse response = new() { Succeeded = result.Succeeded };
 
             if (result.Succeeded)
                 response.Message = "Kullanıcı başarıyla oluşturuldu.";
