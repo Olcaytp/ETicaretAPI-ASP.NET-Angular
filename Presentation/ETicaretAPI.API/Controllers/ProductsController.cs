@@ -26,6 +26,7 @@ namespace ETicaretAPI.API.Controllers
     {
 
         readonly IMediator _mediator;
+        readonly ILogger<ProductsController> _logger;
 
         /* -1.0
         readonly private IOrderWriteRepository _orderWriteRepository;
@@ -33,13 +34,15 @@ namespace ETicaretAPI.API.Controllers
 
         readonly private ICustomerWriteRepository _customerWriteRepository; */
 
-        public ProductsController(IMediator mediator)
+        public ProductsController(IMediator mediator, ILogger<ProductsController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetAllProductQueryRequest getAllProductQueryRequest)
         {
+            _logger.LogInformation("asmdlasmdlamsd");
             GetAllProductQueryReponse response = await _mediator.Send(getAllProductQueryRequest);
             return Ok(response);
         }

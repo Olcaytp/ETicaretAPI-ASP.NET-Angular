@@ -24,7 +24,7 @@ namespace ETicaretAPI.Persistence.Services
                 Id = Guid.NewGuid().ToString(),
                 UserName = model.Username,
                 Email = model.Email,
-                NameSurname = model.NameSurname
+                NameSurname = model.NameSurname,
             }, model.Password);
 
             CreateUserResponse response = new() { Succeeded = result.Succeeded };

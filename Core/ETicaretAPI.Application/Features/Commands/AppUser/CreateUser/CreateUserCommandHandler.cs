@@ -17,10 +17,11 @@ namespace ETicaretAPI.Application.Features.Commands.AppUser.CreateUser
         {
              CreateUserResponse response = await _userService.CreateAsync(new()
             {
-                Username = request.Username,
                 Email = request.Email,
                 NameSurname = request.NameSurname,
-                Password = request.Password
+                Password = request.Password,
+                PasswordConfirm = request.PasswordConfirm,
+                Username = request.Username
             });
             return new()
             {
