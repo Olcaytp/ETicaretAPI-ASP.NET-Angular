@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaretAPI.API", "Presentation\ETicaretAPI.API\ETicaretAPI.API.csproj", "{30A00429-379C-4C9D-9462-B768D8E73648}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaretAPI.SignalR", "Infrastructure\ETicaretAPI.SignalR\ETicaretAPI.SignalR.csproj", "{A37B014E-067A-4895-8E7E-C3D3A285B13D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{30A00429-379C-4C9D-9462-B768D8E73648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30A00429-379C-4C9D-9462-B768D8E73648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30A00429-379C-4C9D-9462-B768D8E73648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37B014E-067A-4895-8E7E-C3D3A285B13D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37B014E-067A-4895-8E7E-C3D3A285B13D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37B014E-067A-4895-8E7E-C3D3A285B13D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37B014E-067A-4895-8E7E-C3D3A285B13D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{3AB144AA-12AD-4CFA-A345-7CDDA466CE10} = {805E670E-B2B0-4834-A814-693A73A35760}
 		{BCC95D45-3707-4DBD-A0CA-0D4D7189F793} = {805E670E-B2B0-4834-A814-693A73A35760}
 		{30A00429-379C-4C9D-9462-B768D8E73648} = {640F1A40-77D5-4A1C-85D1-1AD372B014D2}
+		{A37B014E-067A-4895-8E7E-C3D3A285B13D} = {805E670E-B2B0-4834-A814-693A73A35760}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD59A62A-D464-4D2D-AF38-BCABB45BC1F7}

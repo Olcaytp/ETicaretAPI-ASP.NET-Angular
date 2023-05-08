@@ -1,15 +1,5 @@
 ﻿using ETicaretAPI.Application.Abstraction.Services;
-using ETicaretAPI.Application.Abstraction.Token;
-using ETicaretAPI.Application.DTOs;
-using ETicaretAPI.Application.DTOs.Facebook;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ETicaretAPI.Application.Features.Commands.AppUser.FacebookLogin
 {
@@ -24,7 +14,7 @@ namespace ETicaretAPI.Application.Features.Commands.AppUser.FacebookLogin
 
         public async Task<FacebookLoginCommandResponse> Handle(FacebookLoginCommandRequest request, CancellationToken cancellationToken)
         {
-            var token = await _authService.FacebookLoginAsync(request.AuthToken, 15);
+            var token = await _authService.FacebookLoginAsync(request.AuthToken, 900);
             return new()
             {
                 Token = token
