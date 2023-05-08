@@ -1,4 +1,5 @@
 using ETicaretAPI.API.Configuration.ColumnWriters;
+using ETicaretAPI.API.Extensions;
 using ETicaretAPI.Application;
 using ETicaretAPI.Application.Validators.Products;
 using ETicaretAPI.Infrastructure;
@@ -101,6 +102,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.ConfigureExceptionHandler<Program>(app.Services.GetRequiredService<ILogger<Program>>()); //uygulamada middleware olarak kullanilacak olan ConfigureExceptionHandler metodu icin gerekli olan konfigurasyonu yapar. Bu sayede Global Exception Handler iþlemini gerçekleþtirebiliriz.
 app.UseStaticFiles();
 app.UseSerilogRequestLogging();
 
