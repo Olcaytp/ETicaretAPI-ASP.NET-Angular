@@ -1,4 +1,4 @@
-using ETicaretAPI.API.Configuration.ColumnWriters;
+﻿using ETicaretAPI.API.Configuration.ColumnWriters;
 using ETicaretAPI.API.Extensions;
 using ETicaretAPI.Application;
 using ETicaretAPI.Application.Validators.Products;
@@ -23,6 +23,8 @@ using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpContextAccessor();//Client'tan gelen request neticvesinde oluþturulan HttpContext nesnesine katmanlardaki class'lar üzerinden(busineess logic) eriþebilmemizi saðlayan bir servistir. 
 
 // Add services to the container.
 builder.Services.AddPersistenceServices();
@@ -106,7 +108,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.ConfigureExceptionHandler<Program>(app.Services.GetRequiredService<ILogger<Program>>()); //uygulamada middleware olarak kullanilacak olan ConfigureExceptionHandler metodu icin gerekli olan konfigurasyonu yapar. Bu sayede Global Exception Handler i�lemini ger�ekle�tirebiliriz.
+app.ConfigureExceptionHandler<Program>(app.Services.GetRequiredService<ILogger<Program>>()); //uygulamada middleware olarak kullanilacak olan ConfigureExceptionHandler metodu icin gerekli olan konfigurasyonu yapar. Bu sayede Global Exception Handler işlemini gerçekleştirebiliriz.
 app.UseStaticFiles();
 app.UseSerilogRequestLogging();
 
