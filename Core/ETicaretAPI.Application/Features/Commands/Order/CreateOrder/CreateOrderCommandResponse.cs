@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ETicaretAPI.Application.Features.Commands.Order
+namespace ETicaretAPI.Application.Features.Commands.Order.CreateOrder
 {
-    public  class CreateOrderCommandResponse
+    public class CreateOrderCommandResponse
     {
     }
 }
