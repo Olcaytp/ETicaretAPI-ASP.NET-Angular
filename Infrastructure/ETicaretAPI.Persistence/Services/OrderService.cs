@@ -139,5 +139,4 @@ namespace ETicaretAPI.Persistence.Services
             return (false, null);
         }
         }
-    }
-}
+ }
