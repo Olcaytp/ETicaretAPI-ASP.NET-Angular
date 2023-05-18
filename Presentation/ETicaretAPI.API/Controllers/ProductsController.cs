@@ -1,4 +1,5 @@
-﻿using ETicaretAPI.Application.Abstractions.Storage;
+﻿using ETicaretAPI.Application.Abstraction.Services;
+using ETicaretAPI.Application.Abstractions.Storage;
 using ETicaretAPI.Application.Consts;
 using ETicaretAPI.Application.CustomAttributes;
 using ETicaretAPI.Application.DTOs.Configuration;
@@ -32,6 +33,7 @@ namespace ETicaretAPI.API.Controllers
 
         readonly IMediator _mediator;
         readonly ILogger<ProductsController> _logger;
+        readonly IProductService _productService;
 
         /* -1.0
         readonly private IOrderWriteRepository _orderWriteRepository;
@@ -39,16 +41,24 @@ namespace ETicaretAPI.API.Controllers
 
         readonly private ICustomerWriteRepository _customerWriteRepository; */
 
-        public ProductsController(IMediator mediator, ILogger<ProductsController> logger)
+        public ProductsController(IMediator mediator, ILogger<ProductsController> logger, IProductService productService)
         {
             _mediator = mediator;
             _logger = logger;
+            _productService = productService;
         }
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetAllProductQueryRequest getAllProductQueryRequest)
         {
             GetAllProductQueryReponse response = await _mediator.Send(getAllProductQueryRequest);
             return Ok(response);
+        }
+
+        [HttpGet("qrcode/{productId}")]
+        public async Task<IActionResult> GetQrCodeToProduct([FromRoute] string productId)
+        {
+            var data = await _productService.QrCodeToProductAsync(productId);
+            return File(data, "image/png");
         }
 
         [HttpGet("{Id}")]
