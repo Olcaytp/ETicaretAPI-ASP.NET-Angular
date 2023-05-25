@@ -68,6 +68,6 @@ namespace ETicaretAPI.API.Controllers
             AssignRoleToUserCommandResponse response = await _mediator.Send(assignRoleToUserCommandRequest);
             return Ok(response);
         }
-
+ 
     }
 }

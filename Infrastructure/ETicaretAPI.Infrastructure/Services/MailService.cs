@@ -32,7 +32,7 @@ namespace ETicaretAPI.Infrastructure.Services
                 mail.To.Add(to);
             mail.Subject = subject;
             mail.Body = body;
-            mail.From = new(_configuration["Mail:Username"], "NG E-Ticaret", System.Text.Encoding.UTF8);
+            mail.From = new(_configuration["Mail:Username"], "E-Ticaret", System.Text.Encoding.UTF8);
 
             SmtpClient smtp = new();
             smtp.Credentials = new NetworkCredential(_configuration["Mail:Username"], _configuration["Mail:Password"]);
@@ -51,7 +51,7 @@ namespace ETicaretAPI.Infrastructure.Services
             mail.AppendLine(userId);
             mail.AppendLine("/");
             mail.AppendLine(resetToken);
-            mail.AppendLine("\">Yeni şifre talebi için tıklayınız...</a></strong><br><br><span style=\"font-size:12px;\">NOT : Eğer ki bu talep tarafınızca gerçekleştirilmemişse lütfen bu maili ciddiye almayınız.</span><br>Saygılarımızla...<br><br><br>NG - Mini|E-Ticaret");
+            mail.AppendLine("\">Yeni şifre talebi için tıklayınız...</a></strong><br><br><span style=\"font-size:12px;\">NOT : Eğer bu talep tarafınızca gerçekleştirilmemişse lütfen bu maili ciddiye almayınız.</span><br>Saygılarımızla...<br><br><br>E-Ticaret Project");
 
             await SendMailAsync(to, "Şifre Yenileme Talebi", mail.ToString());
         }

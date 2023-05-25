@@ -45,16 +45,16 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 Logger log = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.File("logs/log.txt")
-    .WriteTo.PostgreSQL(builder.Configuration.GetConnectionString("PostgreSQL"), "Logs", 
+    .WriteTo.PostgreSQL(builder.Configuration.GetConnectionString("PostgreSQL"), "logs", 
         needAutoCreateTable: true,
         columnOptions: new Dictionary<string, ColumnWriterBase>
         {
-            { "message", new RenderedMessageColumnWriter() },
-            { "message_template", new MessageTemplateColumnWriter() },
-            { "level", new LevelColumnWriter() },
-            { "time-stamp", new TimestampColumnWriter() },
-            { "exception", new ExceptionColumnWriter() },
-            { "log_event", new LogEventSerializedColumnWriter() },
+            { "message", new RenderedMessageColumnWriter(NpgsqlDbType.Text) },
+            { "message_template", new MessageTemplateColumnWriter(NpgsqlDbType.Text) },
+            { "level", new LevelColumnWriter(true , NpgsqlDbType.Varchar) },
+            { "time-stamp", new TimestampColumnWriter(NpgsqlDbType.Timestamp) },
+            { "exception", new ExceptionColumnWriter(NpgsqlDbType.Text) },
+            { "log_event", new LogEventSerializedColumnWriter(NpgsqlDbType.Json) },
             { "user_name", new UsernameColumnWriter() }
             })
     .WriteTo.Seq(builder.Configuration["Seq:ServerURL"])

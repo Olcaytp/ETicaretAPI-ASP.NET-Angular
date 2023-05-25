@@ -4,10 +4,9 @@ using ETicaretAPI.Application.Exceptions;
 using ETicaretAPI.Application.Helpers;
 using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Domain.Entities;
-using ETicaretAPI.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.PowerBI.Api.Models;
 using AppUser = ETicaretAPI.Domain.Entities.Identity.AppUser;
 
 namespace ETicaretAPI.Persistence.Services

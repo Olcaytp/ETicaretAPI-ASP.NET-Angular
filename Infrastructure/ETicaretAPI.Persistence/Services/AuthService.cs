@@ -127,8 +127,8 @@ namespace ETicaretAPI.Persistence.Services
                 await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 15);
                 return token;
             }
-            else
-                throw new AuthenticationErrorException();
+			
+            throw new AuthenticationErrorException();
         }
 
         public async Task<Token> RefreshTokenLoginAsync(string refreshToken)
@@ -140,8 +140,7 @@ namespace ETicaretAPI.Persistence.Services
                 await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 300);
                 return token;
             }
-            else
-                throw new NotFoundUserException();
+            throw new AuthenticationErrorException();
         }
 
         public async Task PasswordResetAsnyc(string email)

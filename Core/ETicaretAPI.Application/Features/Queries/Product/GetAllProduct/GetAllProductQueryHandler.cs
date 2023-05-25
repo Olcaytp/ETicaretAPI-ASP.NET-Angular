@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ETicaretAPI.Application.Features.Queries.Product.GetAllProduct
 {
-    public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQueryRequest, GetAllProductQueryReponse>
+    public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQueryRequest, GetAllProductQueryResponse>
     {
         readonly IProductReadRepository _productReadRepository;
         readonly ILogger<GetAllProductQueryHandler> _logger;
@@ -22,9 +22,9 @@ namespace ETicaretAPI.Application.Features.Queries.Product.GetAllProduct
             _logger = logger;
         }
 
-        public async Task<GetAllProductQueryReponse> Handle(GetAllProductQueryRequest request, CancellationToken cancellationToken)
+        public async Task<GetAllProductQueryResponse> Handle(GetAllProductQueryRequest request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("GetAllProductQueryHandler.Handle");
+            _logger.LogInformation("Get all products");
 
             var totalProductCount = _productReadRepository.GetAll(false).Count();
             var products = _productReadRepository.GetAll(false).Skip(request.Page * request.Size).Take(request.Size)
