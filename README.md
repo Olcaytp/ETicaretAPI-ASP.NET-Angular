@@ -43,12 +43,4 @@ ETicaret Projesi, modern bir e-ticaret platformudur. Angular ve ASP .NET Core te
 
 1. Projeyi klonlayın: `git clone https://github.com/your_username/ETicaret.git`
 2. Frontend uygulamasını başlatın: `cd ETicaret/Frontend` ve `ng serve`
-3. Backend API'yi başlatın: `cd ETicaret/Backend` ve `dotnet run`
-
-Daha fazla bilgi için [KURULUM.md](KURULUM.md) dosyasını okuyun.
-
-## Katkılar ve Lisans
-
-Bu proje açık kaynaklıdır ve katkılara açıktır. Lütfen katkılarınız için bir çekme isteği oluşturun. Daha fazla bilgi için [CONTRIBUTING.md](CONTRIBUTING.md) dosyasını okuyun.
-
-Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için [LİSANS.md](LİSANS.md) dosyasını okuyun.
+3. Backend API'yi başlatın: `cd ETicaretAPI` ve `dotnet run`
