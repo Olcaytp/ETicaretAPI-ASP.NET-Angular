@@ -1,35 +1,36 @@
-# ETicaret Projesi
+# ECommerce Project
+
 ![2](https://github.com/Olcaytp/ETicaretAPI-ASP.NET-Angular/assets/85984966/e392fbf9-c1e3-442b-b6fc-8d09b5590efa)
 
-## Proje Hakkında
+## About the Project
 
-ETicaret Projesi, modern bir e-ticaret platformudur. Angular ve ASP .NET Core teknolojilerini kullanarak geliştirilmiştir. Bu proje, kullanıcıların alışveriş yapabileceği, ürünleri inceleyebileceği ve sipariş oluşturabileceği güçlü bir platform sunmayı amaçlar.
+The ECommerce Project is a modern e-commerce platform developed using Angular and ASP .NET Core. The project aims to provide users with a powerful platform where they can shop, explore products, and create orders.
 
-## Özellikler
+## Features
 
-- Kullanıcı Girişi ve Kaydı: Kullanıcılar, sisteme giriş yapabilir ve yeni hesaplar oluşturabilirler. Kayıtlı kullanıcılar, profil bilgilerini düzenleyebilirler.
+- User Login and Registration: Users can log in to the system and create new accounts. Registered users can edit their profile information.
 
-- Ürünleri Keşfetme: Kullanıcılar, kategorilere göre ürünleri filtreleyerek ve arama yaparak istedikleri ürünleri keşfedebilirler.
+- Explore Products: Users can explore products by filtering them based on categories and using the search functionality.
 
-- Ürün Detayları: Kullanıcılar, ürünlerin detay sayfalarına giderek ürün açıklamalarını ve görsellerini inceleyebilirler.
+- Product Details: Users can view product descriptions and images by visiting the product detail pages.
 
-- Sepet İşlemleri: Kullanıcılar, ürünleri sepete ekleyebilir, sepet içeriğini görüntüleyebilir ve istenmeyen ürünleri sepetten çıkarabilirler.
+- Cart Operations: Users can add products to the cart, view cart contents, and remove unwanted items from the cart.
 
-- Ödeme Süreci: Kullanıcılar, sepetlerindeki ürünleri satın almak için ödeme sürecini tamamlayabilirler. Ödeme tamamlandığında sipariş onayı alırlar.
+- Payment Process: Users can complete the payment process to purchase products in their cart. Upon successful payment, they receive order confirmation.
 
-- Yönetim Paneli: Yöneticiler, ürünleri yönetebilir, yeni ürünler ekleyebilir, stok takibi yapabilir ve siparişleri yönetebilir.
+- Admin Dashboard: Administrators can manage products, add new products, track inventory, and manage orders.
 
-- Kampanyalar ve İndirimler: Kullanıcılar, kampanyalardan ve indirimlerden faydalanabilirler.
+- Campaigns and Discounts: Users can benefit from campaigns and discounts.
 
-## Teknolojiler ve Kütüphaneler
+## Technologies and Libraries
 
 - Frontend: Angular, Angular Material, RxJS, Bootstrap
 
 - Backend: ASP .NET Core, Entity Framework Core
 
-- Veri Tabanı: PostgreSQL
+- Database: PostgreSQL
 
-- Diğer: SignalR (anlık bildirimler için), Serilog (logging için), Docker (uygulama konteynerizasyonu için)
+- Others: SignalR (for real-time notifications), Serilog (for logging), Docker (for application containerization)
 
 ## ScreenShots
 ![4](https://github.com/Olcaytp/ETicaretAPI-ASP.NET-Angular/assets/85984966/20b6acfb-6b1c-4876-9a26-51b09390df65)
@@ -37,10 +38,3 @@ ETicaret Projesi, modern bir e-ticaret platformudur. Angular ve ASP .NET Core te
 ![3](https://github.com/Olcaytp/ETicaretAPI-ASP.NET-Angular/assets/85984966/eac596e6-612d-4e1e-aaa9-089a430588dd)
 *******************************************************************************************************************
 ![1](https://github.com/Olcaytp/ETicaretAPI-ASP.NET-Angular/assets/85984966/fc5fef8b-5aac-4c19-9956-4ff63b0e52dc)
-
-
-## Kurulum ve Çalıştırma
-
-1. Projeyi klonlayın: `git clone https://github.com/your_username/ETicaret.git`
-2. Frontend uygulamasını başlatın: `cd ETicaret/Frontend` ve `ng serve`
-3. Backend API'yi başlatın: `cd ETicaretAPI` ve `dotnet run`
