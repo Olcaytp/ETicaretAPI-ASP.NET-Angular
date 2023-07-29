@@ -1,6 +1,6 @@
 # ECommerce Project
+![4](https://github.com/Olcaytp/ETicaretAPI-ASP.NET-Angular/assets/85984966/20b6acfb-6b1c-4876-9a26-51b09390df65)
 
-![2](https://github.com/Olcaytp/ETicaretAPI-ASP.NET-Angular/assets/85984966/e392fbf9-c1e3-442b-b6fc-8d09b5590efa)
 
 ## About the Project
 
@@ -33,7 +33,7 @@ The ECommerce Project is a modern e-commerce platform developed using Angular an
 - Others: SignalR (for real-time notifications), Serilog (for logging), Docker (for application containerization)
 
 ## ScreenShots
-![4](https://github.com/Olcaytp/ETicaretAPI-ASP.NET-Angular/assets/85984966/20b6acfb-6b1c-4876-9a26-51b09390df65)
+![2](https://github.com/Olcaytp/ETicaretAPI-ASP.NET-Angular/assets/85984966/e392fbf9-c1e3-442b-b6fc-8d09b5590efa)
 *******************************************************************************************************************
 ![3](https://github.com/Olcaytp/ETicaretAPI-ASP.NET-Angular/assets/85984966/eac596e6-612d-4e1e-aaa9-089a430588dd)
 *******************************************************************************************************************
